@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="phone">
+	<!-- <typeAlias alias="phoneactive" type="com.autonavi.phone.bean.PhoneActive" /> -->
+	<!-- <resultMap class="com.autonavi.phone.bean.ClientPhoneInfo" id="osmodel">
+		<result property="os" column="os"/>
+		<result property="model" column="model"/>
+	</resultMap> -->
+	
+	<select id="getunusedsn" parameterClass="string" resultClass="orderinfo">
+		select orderid, productid, createtime as ordercreatetime from opg_naviweb_order where userid=#userid# and productid is not null
+  			and productid not in (select sn from opg_naviqd_snactive)
+	</select>
+	
+</sqlMap>

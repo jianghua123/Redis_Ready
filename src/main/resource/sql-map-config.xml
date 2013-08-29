@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<sqlMap resource="com/autonavi/user/map/user.xml" />
+	<sqlMap resource="com/autonavi/store/map/App.xml" />
+	<sqlMap resource="com/autonavi/phone/map/phone.xml" />
+	<sqlMap resource="com/autonavi/scpoi/map/scpoi.xml"/>
+	<sqlMap resource="com/autonavi/promotion/map/marketing.xml"/>
+	<sqlMap resource="com/autonavi/phone/map/phoneactive.xml" />
+	<sqlMap resource="com/autonavi/survey/map/survey.xml" />
+</sqlMapConfig>

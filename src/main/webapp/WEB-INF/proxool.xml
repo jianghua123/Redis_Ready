@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- the proxool configuration can be embedded within your own application's.
+Anything outside the "proxool" tag is ignored. -->
+<something-else-entirely>
+  <proxool>
+    <alias>dbname</alias>
+    <!-- 测试库 -->
+    <!-- 
+     -->
+    <driver-url>jdbc:oracle:thin:@10.2.134.12:1521:orcl</driver-url>
+    <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+    <driver-properties>
+      <property name="user" value="mapabc_opg"/>
+      <property name="password" value="mapabc_opg"/>
+    </driver-properties>
+    
+    <maximum-connection-count>300</maximum-connection-count>
+    <minimum-connection-count>10</minimum-connection-count>
+    <house-keeping-sleep-time>90000</house-keeping-sleep-time>
+    <simultaneous-build-throttle>5</simultaneous-build-throttle>
+    <prototype-count>5</prototype-count>
+    <test-before-use>true</test-before-use>
+    <house-keeping-test-sql>select 1 from dual</house-keeping-test-sql>
+  </proxool>
+</something-else-entirely>
