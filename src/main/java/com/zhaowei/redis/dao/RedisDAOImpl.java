@@ -1,65 +1,30 @@
 package com.zhaowei.redis.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Map;
 
-import redis.clients.jedis.ShardedJedis;
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.zhaowei.redis.factory.JedisFactory;
-import com.zhaowei.redis.util.DB;
+import com.zhaowei.redis.factory.RedisDBKeys;
+import com.zhaowei.redis.model.User;
 
-public class RedisDAOImpl {
-	
-	public boolean setName(String name) {
-		ShardedJedis jedis = null;
-		boolean result = false;
-		try {
-			jedis = JedisFactory.getJedis();
-			jedis.set("name", name);
-			result = true;
-			return result;
-		} finally {
-			JedisFactory.releaseShardedJedis(jedis);
+public class RedisDAOImpl extends SqlMapClientDaoSupport {
+
+	private JedisFactory cachePool;
+
+	public User getUserByName(String name) throws NumberFormatException, ParseException {
+		Map<String, String> user = cachePool.hgetAll(RedisDBKeys.USER + name);
+		SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss");
+		if (null != user && user.size() > 0) {
+			return new User(user.get("userid"), user.get("username"), user.get("nickname"), user.get("email"),
+					user.get("phone"), user.get("city"), Integer.parseInt(user.get("source")), user.get("imei"), format.parse(user.get("createtime")),
+					user.get("sid"));
+			
+			User result = (User) getSqlMapClientTemplate().queryForObject("getUserByName", parameterObject)
 		}
+		
+		
 	}
-
-	public String getName() {
-		ShardedJedis jedis = null;
-		String result = null;
-		try {
-			jedis = JedisFactory.getJedis();
-			result = jedis.get("name");
-			return result;
-		} finally {
-			JedisFactory.releaseShardedJedis(jedis);
-		}
-	}
-
-	public List<List<String>> activityCount(String date) {
-		String cache_key = "com.zhaowei.redis.dao.redisdaoimpl.activityCouont." + date;
-		ShardedJedis jedis = JedisFactory.getJedis();
-		if (null != jedis) {
-
-		}
-		JedisFactory.releaseShardedJedis(jedis);
-		List<List<String>> result = new ArrayList<List<String>>();
-		try {
-			ResultSet rs = DB.getInstance().querySql("select * from user");
-			while (rs.next()) {
-				List<String> record = new ArrayList<String>();
-				record.add(rs.getString("USERID"));
-				record.add(rs.getString("USERNAME"));
-				record.add(rs.getString("NICKNAME"));
-				record.add(rs.getString("EMAIL"));
-				record.add(rs.getString("PHONE"));
-				record.add(rs.getString("CITY"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
 }
