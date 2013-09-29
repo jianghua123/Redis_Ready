@@ -13,12 +13,22 @@
 	<import resource="applicationContext-service.xml"/>
 	<import resource="applicationContext-action.xml"/>
 	
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.logicalcobwebs.proxool.ProxoolDriver" />
-		<property name="url" value="proxool.dbname" />
+	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="driverUrl">
+			<value>jdbc:oracle:thin:@10.2.134.12:1521:orcl</value>
+		</property>
+		<property name="user" value="mapabc_opg" />
+		<property name="password" value="mapabc_opg" />
+		<property name="alias" value="dbname" />
+		<property name="prototypeCount" value="5" />
+		<property name="maximumConnectionCount" value="300" />
+		<property name="minimumConnectionCount" value="19" />
+		<property name="simultaneousBuildThrottle" value="5" />
+		<property name="houseKeepingTestSql" value="select 1 from dual" />
 	</bean>
-
 	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
@@ -27,7 +37,7 @@
 	<bean id="sqlMapClient"
 		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation"
-			value="classpath:sql-map.xml">
+			value="classpath:sql-map-config.xml">
 		</property>
 		<property name="dataSource" ref="dataSource" />
 	</bean>

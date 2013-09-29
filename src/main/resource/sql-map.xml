@@ -6,10 +6,10 @@
 		<result property="os" column="os"/>
 		<result property="model" column="model"/>
 	</resultMap> -->
+	<typeAlias alias="user" type="com.zhaowei.redis.model.User"  />
 	
-	<select id="getunusedsn" parameterClass="string" resultClass="orderinfo">
-		select orderid, productid, createtime as ordercreatetime from opg_naviweb_order where userid=#userid# and productid is not null
-  			and productid not in (select sn from opg_naviqd_snactive)
+	<select id="getUserByName" parameterClass="java.lang.String" resultClass="user">
+		select * from mapabc_opg.opg_navi_user u where u.username = #userName#
 	</select>
 	
 </sqlMap>

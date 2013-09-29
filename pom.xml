@@ -226,11 +226,16 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.5.4</version>
 		</dependency>
-		<dependency>
-			<groupId>proxool</groupId>
-			<artifactId>proxool</artifactId>
-			<version>0.8.3</version>
-		</dependency>
+        <dependency>
+        	<groupId>proxool</groupId>
+        	<artifactId>proxool</artifactId>
+        	<version>0.9.1</version>
+        </dependency>
+	<dependency>
+		<groupId>proxool</groupId>
+		<artifactId>proxool-cglib</artifactId>0
+		<version>0.9.1</version>
+	</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>

@@ -1,4 +1,4 @@
-package com.zhaowei.redis.factory;
+package com.zhaowei.redis.pool;
 
 public class RedisDBKeys {
 	

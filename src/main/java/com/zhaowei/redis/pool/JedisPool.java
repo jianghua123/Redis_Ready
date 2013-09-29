@@ -1,4 +1,4 @@
-package com.zhaowei.redis.factory;
+package com.zhaowei.redis.pool;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +15,7 @@ import redis.clients.jedis.ShardedJedisPool;
 import redis.clients.jedis.SortingParams;
 import redis.clients.jedis.Tuple;
 
-public class JedisFactory implements JedisCommands {
+public class JedisPool implements JedisCommands {
 	private static JedisPoolConfig JEDIS_POOL_CONFIG = null;
 
 	private static ShardedJedisPool POOL = null;

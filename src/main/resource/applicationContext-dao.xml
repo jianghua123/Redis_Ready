@@ -10,8 +10,10 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         
-<!-- 	<bean id="userDao" class="com.autonavi.user.dao.UserDao">
+	<bean id="redisDao" class="com.zhaowei.redis.dao.RedisDAOImpl">
 		<property name="sqlMapClient" ref="sqlMapClient" />
-	</bean> -->
+	</bean>
+	
+	<bean id="jedisPool" class="com.zhaowei.redis.pool.JedisPool" scope="singleton"  />
 </beans>
 
